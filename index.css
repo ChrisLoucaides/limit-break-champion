@@ -1,0 +1,537 @@
+/* ═══════════════════════════════════════════════════════════
+   LIMIT BREAK — CHAMPION SCENE
+   Follows limit-break-bgd brand guidelines:
+   cyan #00D4FF -> magenta #EE00CC on #08081A,
+   Barlow Condensed for display type, Inter for body copy.
+   Designed on a 1920x1080 canvas; every size is in rem and
+   1rem is derived from the viewport width, so the whole scene
+   scales cleanly to any browser source size with a 16:9 ratio.
+   ═══════════════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "BarlowCondensed";
+  src: url("./assets/fonts/BarlowCondensed-600.ttf") format("truetype");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "BarlowCondensed";
+  src: url("./assets/fonts/BarlowCondensed-800.ttf") format("truetype");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "BarlowCondensed";
+  src: url("./assets/fonts/BarlowCondensed-900.ttf") format("truetype");
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter-Variable.ttf") format("truetype");
+  font-weight: 100 900;
+}
+
+:root {
+  /* Brand palette (brand-guidelines.css) */
+  --color-cyan: #00d4ff;
+  --color-magenta: #ee00cc;
+  --color-bg: #08081a;
+  --color-white: #ffffff;
+  --color-gray-hi: #c0c0d8;
+  --color-gray-mid: #7878a0;
+  --gradient: linear-gradient(115deg, var(--color-cyan), var(--color-magenta));
+
+  /* Display face falls back to the CJK stack from main.css so player tags
+     in any script still render */
+  --font-display: "BarlowCondensed", "SairaCondensed", "NotoSans",
+    "NotoSansJP", "NotoSansSC", "NotoSansTC", "NotoSansKR", sans-serif;
+  --font-body: "Inter", "NotoSans", "NotoSansJP", "NotoSansSC", "NotoSansTC",
+    "NotoSansKR", sans-serif;
+
+  /* Composition */
+  --art-width: 48%;
+  --panel-left: 47.5%;
+  --edge: 5rem;
+}
+
+/* 1rem = 16px at 1920px wide */
+html {
+  font-size: calc(100vw / 120);
+}
+
+body {
+  /* globals.js fades the body in once the first state has been applied */
+  opacity: 0;
+  margin: 0;
+  overflow: hidden;
+  width: 1920px;
+  height: 1080px;
+  background: var(--color-bg);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  /* main.css applies a global contrasting text stroke — the brand type is
+     flat, and a stroke would fight the gradient fill on "Champion" */
+  -webkit-text-stroke: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BACKDROP
+   ═══════════════════════════════════════════════════════════ */
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.bg_grid {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3.6875rem,
+      rgba(255, 255, 255, 0.025) 3.6875rem,
+      rgba(255, 255, 255, 0.025) 3.75rem
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 3.6875rem,
+      rgba(255, 255, 255, 0.025) 3.6875rem,
+      rgba(255, 255, 255, 0.025) 3.75rem
+    );
+}
+
+.glow {
+  position: absolute;
+  width: 62rem;
+  height: 62rem;
+  border-radius: 50%;
+  filter: blur(11rem);
+}
+
+.glow--cyan {
+  background: rgba(0, 212, 255, 0.16);
+  top: -16rem;
+  left: -10rem;
+}
+
+.glow--magenta {
+  background: rgba(238, 0, 204, 0.14);
+  bottom: -18rem;
+  right: -8rem;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 50%,
+    transparent 35%,
+    rgba(0, 0, 0, 0.45) 100%
+  );
+}
+
+/* Gradient keyline, mirroring the banner treatments in the brand refs */
+.frame {
+  position: absolute;
+  inset: 0;
+  padding: 0.5rem;
+  background: linear-gradient(
+    120deg,
+    var(--color-cyan),
+    var(--color-magenta) 55%,
+    var(--color-cyan)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 20;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LOGO MARK  (top corner, per brand layout notes)
+   ═══════════════════════════════════════════════════════════ */
+
+.brand_logo {
+  position: absolute;
+  top: 2.5rem;
+  right: 4rem;
+  width: 21rem;
+  height: auto;
+  z-index: 10;
+  filter: drop-shadow(0 0 2rem rgba(0, 212, 255, 0.35))
+    drop-shadow(0 0 4rem rgba(238, 0, 204, 0.25));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CHARACTER ART
+   ═══════════════════════════════════════════════════════════ */
+
+.art {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--art-width);
+  height: 100%;
+  z-index: 1;
+}
+
+/* Soft coloured bloom sitting behind the character silhouette */
+.art_backglow {
+  position: absolute;
+  left: 4%;
+  top: 8%;
+  width: 84%;
+  height: 84%;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 45% 45%,
+    rgba(0, 212, 255, 0.28),
+    rgba(238, 0, 204, 0.16) 55%,
+    transparent 72%
+  );
+  filter: blur(4rem);
+}
+
+.champion.character {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+/* Fade the art into the backdrop on the inner edge so it reads as one image */
+.character .tsh_character {
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 62%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(to right, #000 0%, #000 62%, transparent 96%);
+}
+
+/* Chromatic-aberration outline used across the brand's player graphics */
+.character .tsh_character_img {
+  filter: drop-shadow(-0.35rem 0 0 rgba(0, 212, 255, 0.85))
+    drop-shadow(0.35rem 0 0 rgba(238, 0, 204, 0.85))
+    drop-shadow(0 0 3rem rgba(0, 212, 255, 0.35))
+    drop-shadow(0 1rem 2.5rem rgba(0, 0, 0, 0.55));
+}
+
+/* ═══════════════════════════════════════════════════════════
+   TEXT PANEL
+   ═══════════════════════════════════════════════════════════ */
+
+.panel {
+  position: absolute;
+  left: var(--panel-left);
+  right: var(--edge);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* SetInnerHtml wraps everything in .text; main.css centres it — the panel
+   is left aligned, and FitText scales from the same edge */
+.panel .text {
+  place-content: center flex-start;
+  transform-origin: left center;
+}
+
+/* Empty TSH fields collapse instead of leaving gaps */
+.panel .text_empty {
+  display: none;
+}
+
+/* --- Event line ------------------------------------------- */
+.event_line {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.event_tick {
+  width: 3.5rem;
+  height: 0.25rem;
+  border-radius: 0.125rem;
+  background: var(--gradient);
+}
+
+.event_name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.75rem;
+  height: 2.25rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--color-gray-mid);
+}
+
+/* --- "<Tournament> Champion" ------------------------------ */
+.tournament_name {
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 4.25rem;
+  height: 4.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  text-shadow: 0 0 3.5rem rgba(0, 212, 255, 0.25);
+}
+
+.champion_word {
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 8.25rem;
+  line-height: 0.92;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  margin-top: -0.5rem;
+}
+
+.cw_fill {
+  /* Held at full chroma for longer than a plain two-stop ramp so the word
+     keeps the punch the logo has */
+  background: linear-gradient(
+    100deg,
+    var(--color-cyan) 12%,
+    #8a6ff0 50%,
+    var(--color-magenta) 88%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Hard offset shadow echoing the logo's drop shadow, plus brand bloom */
+  filter: drop-shadow(0.3rem 0.3rem 0 rgba(4, 4, 12, 0.85))
+    drop-shadow(0 0 3rem rgba(0, 212, 255, 0.4))
+    drop-shadow(0 0 6rem rgba(238, 0, 204, 0.28));
+}
+
+/* Slow specular sweep across the wordmark */
+.cw_shine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: rgba(255, 255, 255, 0.8);
+  pointer-events: none;
+  /* Narrow band inside an oversized mask; sliding the mask from 100% to 0%
+     walks the highlight left-to-right and parks it off the right edge */
+  -webkit-mask-image: linear-gradient(
+    105deg,
+    transparent 45%,
+    #000 50%,
+    transparent 55%
+  );
+  mask-image: linear-gradient(
+    105deg,
+    transparent 45%,
+    #000 50%,
+    transparent 55%
+  );
+  -webkit-mask-size: 320% 100%;
+  mask-size: 320% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: 0% 0;
+  mask-position: 0% 0;
+  animation: cw_sweep 6s cubic-bezier(0.4, 0, 0.2, 1) 2s infinite;
+}
+
+@keyframes cw_sweep {
+  0% {
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+  35%,
+  100% {
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
+  }
+}
+
+.title_rule {
+  width: 26rem;
+  height: 0.375rem;
+  border-radius: 0.1875rem;
+  background: var(--gradient);
+  margin: 1.75rem 0 2.25rem;
+}
+
+/* --- Player -------------------------------------------------- */
+.sponsor_logo {
+  height: 5rem;
+  margin-bottom: 0.75rem;
+}
+
+.sponsor_logo img {
+  height: 5rem;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0.25rem 0.75rem rgba(0, 0, 0, 0.6));
+}
+
+.champion_name {
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 9rem;
+  height: 9.5rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--color-white);
+  /* Cyan/magenta split, matching the player announcement graphics */
+  text-shadow: -0.22rem 0 0 rgba(0, 212, 255, 0.9),
+    0.22rem 0 0 rgba(238, 0, 204, 0.9), 0 0.5rem 2.5rem rgba(0, 0, 0, 0.65);
+}
+
+.champion_name .sponsor {
+  color: var(--color-cyan);
+  font-size: 0.55em;
+  margin-right: 0.35em;
+  text-shadow: none;
+}
+
+.champion_name .slash {
+  color: var(--color-magenta);
+  margin: 0 0.25em;
+  text-shadow: none;
+}
+
+.champion_name .tsh_transcript .transcript {
+  color: var(--color-gray-hi);
+}
+
+.real_name {
+  width: 100%;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 2.5rem;
+  height: 3rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  margin-top: 0.5rem;
+}
+
+.real_name .slash {
+  color: var(--color-magenta);
+  margin: 0 0.35em;
+}
+
+/* --- Meta chips ------------------------------------------- */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  margin-top: 2.25rem;
+  max-width: 100%;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  height: 3.25rem;
+  padding: 0 1.1rem;
+  border-radius: 0.1875rem;
+  border: 1px solid rgba(0, 212, 255, 0.45);
+  background: rgba(0, 212, 255, 0.08);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-cyan);
+  max-width: 100%;
+}
+
+.chip.text_empty {
+  display: none;
+}
+
+.chip .text {
+  gap: 0.6rem;
+}
+
+/* The character the champion played gets the accent treatment */
+.chip.character_name {
+  border-color: var(--color-magenta);
+  background: rgba(238, 0, 204, 0.1);
+  color: var(--color-white);
+  font-weight: 800;
+  font-size: 2rem;
+  height: 3.75rem;
+  padding: 0 1.4rem;
+  max-width: 34rem;
+}
+
+.chip img.flag {
+  height: 1.5rem;
+  width: auto;
+  border-radius: 0.125rem;
+}
+
+.chip .flagname {
+  margin-left: 0.15rem;
+}
+
+.chip .variant_icon {
+  height: 1.75rem;
+  width: auto;
+  margin-left: 0.4rem;
+}
+
+.chip .variant_intercal {
+  width: 0.4rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER  (bracket size, counterweight to the logo)
+   ═══════════════════════════════════════════════════════════ */
+
+.footer {
+  position: absolute;
+  right: var(--edge);
+  bottom: 3.25rem;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer_tick {
+  width: 3.5rem;
+  height: 0.25rem;
+  border-radius: 0.125rem;
+  background: var(--gradient);
+}
+
+.entrants {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.75rem;
+  height: 2.25rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gray-mid);
+}
+
+.entrants .text {
+  place-content: center flex-start;
+}
+
+.footer.hidden {
+  display: none;
+}
