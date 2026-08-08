@@ -1,0 +1,90 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="../include/globals.js"></script>
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="./feed.css" />
+  </head>
+  <body>
+    <!-- The video opening. Nothing is painted here — the OBS video source
+         placed underneath this browser source shows straight through.
+         The placeholder inside is only drawn with ?feed_preview=1 -->
+    <div class="feed_slot">
+      <div class="feed_hatch"></div>
+      <div class="feed_marks">
+        <div class="feed_label">Live Feed</div>
+        <div class="feed_size"></div>
+      </div>
+    </div>
+
+    <!-- Chrome: the 'L' of layout wrapping the feed (right rail + bottom bar) -->
+    <div class="chrome">
+      <div class="bg_grid"></div>
+      <div class="glow glow--cyan"></div>
+      <div class="glow glow--magenta"></div>
+      <div class="chrome_tint"></div>
+    </div>
+
+    <!-- Gradient seam tracing the opening, plus the outer keyline -->
+    <div class="seam seam--v"></div>
+    <div class="seam seam--h"></div>
+    <div class="seam_corner"></div>
+    <div class="frame"></div>
+
+    <!-- Right rail: logo over the champion's character art -->
+    <div class="rail">
+      <img class="brand_logo" src="./assets/Logo-Large.png" />
+
+      <div class="art">
+        <div class="art_backglow"></div>
+        <div class="champion character"></div>
+      </div>
+
+      <div class="rail_foot">
+        <div class="chip character_name"></div>
+        <div class="footer">
+          <span class="footer_tick"></span>
+          <div class="entrants"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar: title block, champion, meta chips -->
+    <div class="bar">
+      <div class="bar_title">
+        <div class="event_line">
+          <span class="event_tick"></span>
+          <div class="event_name"></div>
+        </div>
+
+        <div class="tournament_name"></div>
+
+        <div class="champion_word">
+          <span class="cw_fill">Champion</span>
+          <span class="cw_shine" aria-hidden="true">Champion</span>
+        </div>
+      </div>
+
+      <div class="bar_split"></div>
+
+      <div class="bar_player">
+        <div class="player_head">
+          <div class="sponsor_logo"></div>
+          <div class="champion_name"></div>
+        </div>
+        <div class="real_name"></div>
+      </div>
+
+      <div class="meta">
+        <div class="chip pronoun"></div>
+        <div class="chip flagcountry"></div>
+        <div class="chip flagstate"></div>
+        <div class="chip seed"></div>
+        <div class="chip twitter"></div>
+      </div>
+    </div>
+
+    <script src="champion.js"></script>
+    <script src="feed.js"></script>
+  </body>
+</html>

@@ -4,11 +4,22 @@
     "champion_label": "Champion",
     "display_event_name": true
   },
+  "champion_feed": {
+    "feed_width": 1440,
+    "feed_height": 810,
+    "feed_preview": false
+  },
   "assets": {
     "default": {
       "asset_key": ["mural_art", "full", "portrait"],
       "custom_zoom": 0.6,
       "custom_center": [0.5, 0.45]
+    }
+  },
+  "assets_feed": {
+    "default": {
+      "custom_zoom": 0.85,
+      "custom_center": [0.5, 0.4]
     }
   }
 }
