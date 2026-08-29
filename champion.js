@@ -20,16 +20,34 @@ const CHAMPION_DEFAULTS = {
   display_event_name: true,
 };
 
-// start.gg hands back numeric codes for the Cypriot districts; map them onto
-// the three-letter abbreviations we show on the flag chip. Anything unmapped
-// falls through to whatever start.gg gave us.
+// start.gg hands back state codes per country (numeric for Cyprus, ISO
+// 3166-2 letters for Greece); map them onto the three-letter abbreviations
+// we show on the flag chip. Anything unmapped falls through to whatever
+// start.gg gave us.
 const STATE_CODE_LABELS = {
+  // Cyprus
   "01": "NIC",
   "02": "LIM",
   "03": "LCA",
   "04": "FAM",
   "05": "PAF",
   "06": "KYR",
+  // Greece
+  "A": "EMT", // East Macedonia and Thrace
+  "A2": "EAT", // East Attica
+  "B": "CMA", // Central Macedonia
+  "C": "WMA", // West Macedonia
+  "D": "EPI", // Epirus
+  "E": "THE", // Thessaly
+  "F": "ION", // Ionian Islands
+  "G": "WGR", // West Greece
+  "H": "CGR", // Central Greece
+  "I": "ATT", // Attica
+  "J": "PEL", // Peloponnese
+  "K": "NAE", // North Aegean
+  "L": "SAE", // South Aegean
+  "M": "CRE", // Crete
+  "13": "ACH", // Achaea
 };
 
 function stateLabel(code) {
